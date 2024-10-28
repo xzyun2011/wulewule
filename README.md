@@ -35,7 +35,9 @@
 
 ## 效果图
 
-待加...
+<video src="assets/wulewulev1_7b_4bit.mp4"></video>
+
+https://github.com/user-attachments/assets/9e01d57a-96a9-4ca6-855c-2128010cd0c7
 
 ## 🗂️ 目录
 
@@ -49,10 +51,10 @@
 
 | 模型                        | 基座                  | 类型                       | ModelScope(HF)                                               | OpenXLab(HF)                                                 |
 | --------------------------- | --------------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| wulewule_v1_1_8b            | internlm2_5_chat_1_8b | 预训练+QLoRA微调           | https://modelscope.cn/models/xzyun2011/wulewule_v1_1_8b-w4a16-4bit | https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_1_8b-w4a16-4bit |
-| wulewule_v1_1_8b-w4a16-4bit | internlm2_5_chat_1_8b | 预训练+QLoRA微调+w4a16量化 | https://modelscope.cn/models/xzyun2011/wulewule_v1_1_8b      | https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_1_8b |
-| wulewule_v1_7b              | internlm2_5_chat_7b   | 预训练+QLoRA微调           | https://modelscope.cn/models/xzyun2011/wulewule_v1_7b-w4a16-4bit | https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_7b-w4a16-4bit |
-| wulewule_v1_7b-w4a16-4bit   | internlm2_5_chat_7b   | 预训练+QLoRA微调+w4a16量化 | https://modelscope.cn/models/xzyun2011/wulewule_v1_7b        | https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_7b |
+| wulewule_v1_1_8b            | internlm2_5_chat_1_8b | 预训练+QLoRA微调           | [wulewule_v1_1_8b](https://modelscope.cn/models/xzyun2011/wulewule_v1_1_8b) | [wulewule_v1_1_8b](https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_1_8b) |
+| wulewule_v1_1_8b-w4a16-4bit | internlm2_5_chat_1_8b | 预训练+QLoRA微调+w4a16量化 | [wulewule_v1_1_8b-w4a16-4bit](https://modelscope.cn/models/xzyun2011/wulewule_v1_1_8b-w4a16-4bit) | [wulewule_v1_1_8b-w4a16-4bit](https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_1_8b-w4a16-4bit) |
+| wulewule_v1_7b              | internlm2_5_chat_7b   | 预训练+QLoRA微调           | [wulewule_v1_7b](https://modelscope.cn/models/xzyun2011/wulewule_v1_7b) | [wulewule_v1_7b](https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_7b) |
+| wulewule_v1_7b-w4a16-4bit   | internlm2_5_chat_7b   | 预训练+QLoRA微调+w4a16量化 | [wulewule_v1_7b-w4a16-4bit](https://modelscope.cn/models/xzyun2011/wulewule_v1_7b-w4a16-4bit) | [wulewule_v1_7b-w4a16-4bit](https://openxlab.org.cn/models/detail/xzyun2011/wulewule_v1_7b-w4a16-4bit) |
 
 
 
@@ -202,7 +204,8 @@ lmdeploy lite auto_awq \
 
 
 后续可以做的：
-rag 流式输出
+
+rag 流式输出；增加history记忆
 
 1. 增加标准测试集，opencompass评估模型性能
 2. 加入多模态功能
