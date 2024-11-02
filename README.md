@@ -9,6 +9,7 @@
   </a>
 
 
+
 <h3 align="center"> 悟了悟了</h3>
   <p align="center">
     <br />
@@ -37,11 +38,35 @@
 
 <video src="assets/wulewulev1_7b_4bit.mp4"></video>
 
-https://github.com/user-attachments/assets/9e01d57a-96a9-4ca6-855c-2128010cd0c7
+
 
 ## 🗂️ 目录
 
-[TOC]
+- [前言](#前言)
+- [效果图](#效果图)
+- [框架图](#框架图)
+- [Model Zoo](#model-zoo)
+- [快速使用](#快速使用)
+  - [本地部署](#本地部署)
+  - [在线体验](#在线体验)
+- [详细指南](#详细指南)
+  - [数据集制作](#数据集制作)
+    - [增量预训练数据](#增量预训练数据)
+    - [自我认知数据](#自我认知数据)
+    - [指令微调数据](#指令微调数据)
+  - [模型训练](#模型训练)
+    - [QLoRA+deepspeed训练](#qloradeepspeed训练)
+    - [模型转换 + LoRA 合并](#模型转换--lora-合并)
+  - [模型量化](#模型量化)
+  - [RAG(检索增强生成)](#rag检索增强生成)
+- [开发计划](#开发计划)
+  - [初版功能](#初版功能)
+  - [后续多模态版本](#后续多模态版本)
+- [致谢](#致谢)
+- [免责声明](#免责声明)
+
+---
+
 
 ## 框架图
 
@@ -69,10 +94,13 @@ conda create -n wulewule python=3.10.0 -y
 conda activate wulewule
 conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=12.1 -c pytorch -c nvidia
 pip install -r requirements.txt
+apt-get install git-lfs
 streamlit run app.py
 ```
 
 ### 在线体验
+
+制作中...
 
 wulewule_InternLM2-Chat-1_8版体验地址：https://openxlab.org.cn/apps/detail/xzyun2011/wulewule_v1
 
@@ -94,7 +122,7 @@ python3 generate_incremental_pretraining.py --root-path ./ --save-path ./increme
 
 **自我认知数据**
 
-将data_utils.py中的"api_key"换成自己的，执行脚本，将得到`self_cognition.jsonl`自我认知数据
+将`data_utils.py`中的"api_key"换成自己的，执行脚本，将得到`self_cognition.jsonl`自我认知数据
 
 ```
 python3 generate_selfcognition.py --save-path ./self_cognition.jsonl
@@ -111,6 +139,7 @@ python3 huixiangdou_rag_QA.py
 ### 模型训练
 
 训练配置代码讲解见[训练配置](xtuner_config/readme.md)，命令行直接如下操作：
+其中有个参数需要注意一下：accumulative_counts = 1 #单卡训练切记改成1，不然会有问题，切记切记！！！
 
 **QLoRA+deepspeed训练**
 
@@ -137,6 +166,8 @@ xtuner convert merge /root/models/internlm2_5-1_8b-chat ./hf /root/wulewule/mode
 
 ### 模型量化
 
+使用一下命令对模型采取w4a16量化，更多操作请参考[lmdeploy官网文档](https://lmdeploy.readthedocs.io/en/latest/)
+
 ```
 lmdeploy lite auto_awq \
    /root/wulewule/models/wulewule_v1_1_8b \
@@ -152,30 +183,43 @@ lmdeploy lite auto_awq \
 
 **量化前后速度对比**
 
-| Model                            | Toolkit              | Speed (words/s) |
-| -------------------------------- | -------------------- | --------------- |
-| wulewule_v1_1_8b                 | transformer          | 68.0986         |
-| internlm2_5-1_8b-chat-w4a16-4bit | LMDeploy (Turbomind) | 667.8319        |
+| Model                       | Toolkit              | Speed (words/s) |
+| --------------------------- | -------------------- | --------------- |
+| wulewule_v1_1_8b            | transformer          | 68.0986         |
+| wulewule_v1_1_8b-w4a16-4bit | LMDeploy (Turbomind) | 667.8319        |
+
+修改`configs/model_cfg.yaml`文件开启基于lmdeploy的w4a16-4bit模型（默认开启）；`deploy/lmdeploy_model.py`里是一个简单的demo，修改配置后可以直接执行
+
+```
+python3 deploy/lmdeploy_model.py
+```
+
+### RAG(检索增强生成)
+
+默认`data`目录为txt数据源目录，开启RAG后，会使用bce-embedding-base_v1自动将`data`目录下的txt数据转为换chroma向量库数据，存放在`rag/chroma `目录下（如果该目录下已有数据库文件，则跳过数据库创建），然后使用bce-reranker-base_v1对检索到的信息重排序后，将问题和上下文一起给模型得到最终输出。`rag/simple_rag.py`里是一个简单的demo，参数配置见`configs/rag_cfg.yaml`。
+
+RAG代码讲解见[rag配置](rag/readme.md)。
 
 
+## 开发计划
 
-## 版本功能
+### 初版功能
 
-### 初版
+- [x] 游戏角色、背景故事、原著联系等知识问答助手
 
-* 游戏角色、背景故事、原著联系等知识问答助手
-* 使用RAG支持游戏攻略、菜单、网络梗等新鲜知识的更新
-* 基于OpenXLab使用LMDepoly实现初版demo部署
+- [x] 使用RAG支持游戏攻略、菜单、网络梗等新鲜知识的更新
 
-### 进阶版
+- [x] 基于OpenXLab使用LMDepoly实现初版demo部署
 
-- 加入语音多模态，如ASR（用户语音输入）、TTS（猴哥语音回答问题）
+- [ ] 增加history记忆，增加标准测试集，opencompass评估模型性能
 
-- 加入图像生成，接入别人的[SD+LoRA模型]( https://www.qpipi.com/73996/ )，判断用户意图生成对应prompt的天命人
+### 后续多模态版本
 
-- 加入音乐多模态，接类似[SUNO-AI](https://suno-ai.org/)，生成古典风格游戏配乐
+- [ ] 加入语音多模态，如ASR（用户语音输入）、TTS（猴哥语音回答问题）
 
+- [ ] 加入图像生成，接入别人的[SD+LoRA模型]( https://www.qpipi.com/73996/ )，判断用户意图生成对应prompt的天命人
 
+- [ ] 加入音乐多模态，接类似[SUNO-AI](https://suno-ai.org/)，生成古典风格游戏配乐
 
 
 ## 致谢
@@ -194,19 +238,3 @@ lmdeploy lite auto_awq \
 ## 免责声明
 
 **本项目相关资源仅供学术研究之用，严禁用于商业用途。** 使用涉及第三方代码的部分时，请严格遵循相应的开源协议。模型生成的内容受模型计算、随机性和量化精度损失等因素影响，本项目不对其准确性作出保证。对于模型输出的任何内容，本项目不承担任何法律责任，亦不对因使用相关资源和输出结果而可能产生的任何损失承担责任。本项目由个人及协作者业余时间发起并维护，因此无法保证能及时回复解决相应问题。
-
-
-
-## TODO List
-
-
-
-
-
-后续可以做的：
-
-rag 流式输出；增加history记忆
-
-1. 增加标准测试集，opencompass评估模型性能
-2. 加入多模态功能
-3. 攻略优化
