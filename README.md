@@ -38,7 +38,7 @@
 
 <video src="assets/wulewulev1_7b_4bit.mp4"></video>
 
-
+https://github.com/user-attachments/assets/9e01d57a-96a9-4ca6-855c-2128010cd0c7
 
 ## 🗂️ 目录
 - [📜 前言](#-前言)
