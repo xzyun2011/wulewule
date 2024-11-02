@@ -32,7 +32,7 @@ use_varlen_attn = False
 
 # Data
 data_dir="/root/wulewule/data"
-data_files = [ f'{data_dir}/wukongtoday_clean_datas.jsonl', f'{data_dir}/huixiangdou_conversations.jsonl']
+data_files = [f'{data_dir}/self_cognition_100.jsonl',  f'{data_dir}/huixiangdou_conversations.jsonl']
 prompt_template = PROMPT_TEMPLATE.internlm2_chat
 max_length = 2048
 pack_to_max_length = True

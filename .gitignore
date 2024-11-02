@@ -1,0 +1,27 @@
+
+
+# Distribution / packaging
+.Python
+build/
+
+models/
+outputs/
+rag/chroma/
+
+# database
+*.sqlite3
+
+# log
+*.log
+.env
+
+# ---> VisualStudioCode
+.vscode/*
+.vscode/settings.json
+*.code-workspace
+
+/.idea
+
+ 
+# __pycache__ 目录
+**/__pycache__/

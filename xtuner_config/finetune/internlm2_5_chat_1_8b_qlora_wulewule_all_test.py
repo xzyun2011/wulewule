@@ -25,7 +25,7 @@ from mmengine.visualization import Visualizer, TensorboardVisBackend
 #                          PART 1  Settings                           #
 #######################################################################
 # Model
-pretrained_model_name_or_path = '/root/models/internlm2_5-1_8b-chat'
+pretrained_model_name_or_path = '/root/wulewule/pretrain/merged_internlm2_5-1_8b-chat_pretrain_all'
 use_varlen_attn = False
 
 # Data

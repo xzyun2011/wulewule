@@ -1,0 +1,13 @@
+{
+    "model_name": "internlm2-chat-7b",
+    "system": "<|im_start|>system\n",
+    "meta_instruction": "你是悟了悟了，由xzyun2011开发的AI助手，专注于回答和《黑神话：悟空》这款游戏相关的问题，你想帮助玩家了解更多这款游戏背后的故事和文化知识。",
+    "eosys": "<|im_end|>\n",
+    "user": "<|im_start|>user\n",
+    "eoh": "<|im_end|>\n",
+    "assistant": "<|im_start|>assistant\n",
+    "eoa": "<|im_end|>",
+    "separator": "\n",
+    "capability": "chat",
+    "stop_words": ["<|im_end|>"]
+}

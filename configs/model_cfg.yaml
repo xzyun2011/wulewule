@@ -1,0 +1,16 @@
+
+########### 主配置文件加载优先级，先rag_cfg.yaml，再本文件覆盖重复配置 ##########
+defaults:
+  - rag_cfg
+  - _self_
+
+llm_default_dir: /root/wulewule/models
+llm_model: ${llm_default_dir}/wulewule_v1_1_8b-w4a16-4bit  # wulewule model path, w4a16-4bit must turn on "use_lmdepoly"
+# llm_model: ${repo_root}/models/wulewule_v1_1_8b  # wulewule model path
+use_lmdepoly: True
+use_rag: True  ## 后续再加入基于lmdepoly的rag
+stream_response: True # whether use streaming output
+#######################################################################
+#                      lmdeploy 4bit used                      #
+#######################################################################
+cache_max_entry_count: 0.2 #lmdeploy 4bit,  k/v cache内存占比调整为总显存的 20%
