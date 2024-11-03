@@ -1,7 +1,7 @@
 import os
 from modelscope.hub.snapshot_download import snapshot_download
 
-def download_model(llm_model_path = "/root/wulewule/models/wulewule_v1_1_8b", repo_id="xzyun2011"):
+def download_model(llm_model_path = "/root/test_env/models/wulewule_v1_1_8b", repo_id="xzyun2011"):
     save_dir = os.path.dirname(llm_model_path)
     model_name = os.path.basename(llm_model_path)
     if not os.path.exists(llm_model_path):
