@@ -1,4 +1,4 @@
-BCEmbedding==0.1.5
+BCEmbedding
 transformers==4.45.0
 streamlit==1.36.0
 gradio==5.0.2
