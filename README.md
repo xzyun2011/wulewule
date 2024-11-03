@@ -117,7 +117,7 @@ cd wulewule/data
 python3 generate_incremental_pretraining.py --root-path ./ --save-path ./incremental_pretraining.jsonl
 ```
 
-#### 🤔 自我认知数据**
+#### 🤔 自我认知数据
 
 将`data_utils.py`中的"api_key"换成自己的，执行脚本，将得到`self_cognition.jsonl`自我认知数据
 
@@ -125,7 +125,7 @@ python3 generate_incremental_pretraining.py --root-path ./ --save-path ./increme
 python3 generate_selfcognition.py --save-path ./self_cognition.jsonl
 ```
 
-#### 💬 指令微调数据**
+#### 💬 指令微调数据
 
 开启茴香豆server服务后，执行脚本，将得到`huixiangdou_conversations.jsonl`准确的问答对数据
 
