@@ -95,7 +95,9 @@ class WuleRAG():
         ## bce-embedding-base_v1 如果路径不对，则下载默认的模型
         if not os.path.exists(embeddings_model):
             if embeddings_model.endswith("bce-embedding-base_v1"):
-                embeddings_model = snapshot_download("maidalun1020/bce-embedding-base_v1", revision='master')
+                ## 模型上两级目录是保存路径
+                save_dir = os.path.dirname(os.path.dirname(embeddings_model))
+                embeddings_model = snapshot_download("maidalun/bce-embedding-base_v1", cache_dir=save_dir, revision='master')
                 logging.info(f"bce-embedding model not exist, downloading from modelscope \n save to {embeddings_model}")
             else:
                 raise ValueError(f"{embeddings_model} model not exist, please reset or re-download your model.")
@@ -107,7 +109,9 @@ class WuleRAG():
         ## bce-reranker-base_v1 如果路径不对，则下载默认的模型
         if not os.path.exists(reranker_model):
             if reranker_model.endswith("bce-reranker-base_v1"):
-                reranker_model = snapshot_download("maidalun1020/bce-reranker-base_v1", revision='master')
+                ## 模型上两级目录是保存路径
+                save_dir = os.path.dirname(os.path.dirname(reranker_model))
+                reranker_model = snapshot_download("maidalun/bce-reranker-base_v1", cache_dir=save_dir, revision='master')
                 logging.info(f"reranker_model model not exist, downloading from modelscope \n save to {reranker_model}")
             else:
                 raise ValueError(f"{reranker_model} model not exist, please reset or re-download your model.")

@@ -1,10 +1,10 @@
 # rag config
-repo_root: /root/wulewule
+repo_root: .
 data_source_dir: ${repo_root}/data   # txt data dir
 db_persist_directory: ${repo_root}/rag/chroma # chroma data base dir
 llm_model: ${repo_root}/models/wulewule_v1_1_8b  # wulewule model path
-embeddings_model: /root/share/new_models/maidalun1020/bce-embedding-base_v1   # rag embeddings
-reranker_model: /root/share/new_models/maidalun1020/bce-reranker-base_v1 # rag reranker
+embeddings_model: ${repo_root}/models/maidalun/bce-embedding-base_v1   # rag embeddings
+reranker_model: ${repo_root}/models/maidalun/bce-reranker-base_v1 # rag reranker
 stream_response: True # whether use streaming output
 llm_system_prompt: | 
   你是悟了悟了，由xzyun2011开发的AI助手，专注于回答和《黑神话：悟空》这款游戏相关的问题，你想帮助玩家了解更多这款游戏背后的故事和文化知识。
